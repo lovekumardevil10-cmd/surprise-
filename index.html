@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:#0b0b0b;
+  color:#fff;
+  font-family:Arial, sans-serif;
+}
+
+.container{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.page{
+  display:none;
+  max-width:340px;
+  width:90%;
+  text-align:center;
+}
+
+.page.active{
+  display:block;
+}
+
+.heart{
+  font-size:90px;
+  cursor:pointer;
+}
+
+.btn{
+  margin-top:20px;
+  padding:10px 22px;
+  border:none;
+  border-radius:20px;
+  background:#ff4f8b;
+  color:white;
+  font-size:14px;
+  display:none;
+}
+
+.mcq{
+  background:#1a1a1a;
+  padding:20px;
+  border-radius:14px;
+  text-align:left;
+}
+
+.q{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:14px;
+}
+
+.opt{
+  display:block;
+  width:100%;
+  margin-bottom:10px;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  background:#2a2a2a;
+  color:white;
+  text-align:left;
+}
+
+.opt:active{
+  background:#ff4f8b;
+}
+
+.note{
+  font-size:13px;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h3>A little surprise for you</h3>
+  <div class="heart" id="heart">💗</div>
+  <p style="font-size:13px;">Hold the heart</p>
+  <button class="btn" id="startBtn" onclick="go(2)">Next →</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <div class="mcq">
+    <div class="q">Q1) What is my birthday?</div>
+    <button class="opt" onclick="q1('A')">A) 20 January</button>
+    <button class="opt" onclick="q1('B')">B) 15 July</button>
+    <button class="opt" onclick="q1('C')">C) 9 February</button>
+    <button class="opt" onclick="q1('D')">D) 25 August</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="mcq">
+    <div class="q">Q2) When did you become important to me?</div>
+    <button class="opt" onclick="q2()">A) On your birthday</button>
+    <button class="opt" onclick="q2()">B) Yesterday</button>
+    <button class="opt" onclick="q2()">C) Few days after we met</button>
+    <button class="opt" onclick="q2()">D) When I said I love you</button>
+    <button class="opt" onclick="q2()">E) First call</button>
+    <div class="note">More than one answer is correct 💗</div>
+    <button class="btn" id="n2" onclick="go(4)">Next →</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <div class="mcq">
+    <div class="q">Q3) What can I do for you?</div>
+    <button class="opt" onclick="q3()">A) Leave my family</button>
+    <button class="opt" onclick="q3()">B) Stand by you forever</button>
+    <button class="opt" onclick="q3()">C) Leave everything and come to you</button>
+    <button class="opt" onclick="q3()">D) Fight the world for you</button>
+    <div class="note">Some answers don’t need conditions 💞</div>
+    <button class="btn" id="n3" onclick="go(5)">Next →</button>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <h2>💞</h2>
+  <p>
+    This was just the beginning.<br><br>
+    Happy New Year 2026 🎉<br><br>
+    I Love You ❤️
+  </p>
+</div>
+
+</div>
+
+<script>
+let timer;
+const heart=document.getElementById("heart");
+
+heart.addEventListener("touchstart",hold);
+heart.addEventListener("mousedown",hold);
+heart.addEventListener("touchend",clear);
+heart.addEventListener("mouseup",clear);
+
+function hold(){
+  timer=setTimeout(()=>{
+    document.getElementById("startBtn").style.display="inline-block";
+  },700);
+}
+function clear(){ clearTimeout(timer); }
+
+function go(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+
+function q1(a){
+  if(a==="C") go(3);
+  else alert("Try again 🙂");
+}
+
+function q2(){
+  document.getElementById("n2").style.display="inline-block";
+}
+
+function q3(){
+  document.getElementById("n3").style.display="inline-block";
+}
+</script>
+
+</body>
+  </html>
