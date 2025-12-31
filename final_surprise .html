@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Little Surprise</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:#0b0b0b;
+  color:white;
+  font-family: Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+.petals{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:url("https://i.imgur.com/6YV6GQn.png");
+  animation:fall 18s linear infinite;
+  opacity:0.35;
+}
+@keyframes fall{
+  from{background-position:0 0;}
+  to{background-position:0 1000px;}
+}
+.page{
+  display:none;
+  text-align:center;
+  max-width:320px;
+  margin:auto;
+}
+.page.active{
+  display:block;
+}
+.heart{
+  font-size:60px;
+  cursor:pointer;
+  user-select:none;
+}
+.next-btn{
+  margin-top:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:20px;
+  background:#ff4f8b;
+  color:white;
+  font-size:14px;
+  display:none;
+}
+.mcq-box{
+  background:rgba(255,255,255,0.12);
+  padding:20px;
+  border-radius:16px;
+  text-align:left;
+}
+.question{
+  font-size:17px;
+  font-weight:600;
+  margin-bottom:15px;
+}
+.option{
+  width:100%;
+  padding:10px 12px;
+  margin-bottom:10px;
+  border:none;
+  border-radius:10px;
+  background:rgba(255,255,255,0.25);
+  color:white;
+  font-size:15px;
+  text-align:left;
+}
+.option:active{
+  background:#ff4f8b;
+}
+.note{
+  margin-top:15px;
+  font-size:13px;
+  opacity:0.85;
+}
+/* Letter & Message styling */
+.letter, .message{
+  background:rgba(0,0,0,0.5);
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+}
+.message-text{
+  font-size:16px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+</style>
+</head>
+<body>
+<div class="petals"></div>
+
+<!-- PAGE 1: Heart -->
+<div class="page active" id="p1">
+  <h3>A little surprise for you</h3>
+  <div class="heart" id="heart">ðŸ’—</div>
+  <p style="font-size:13px;">Hold the heart</p>
+  <button class="next-btn" id="nextHeart" onclick="go(2)">Next â†’</button>
+</div>
+
+<!-- PAGE 2: MCQ 1 -->
+<div class="page" id="p2">
+  <div class="mcq-box">
+    <div class="question">Q1) What is my birthday?</div>
+    <button class="option" onclick="mcq1('A')">A) 20 January</button>
+    <button class="option" onclick="mcq1('B')">B) 15 July</button>
+    <button class="option" onclick="mcq1('C')">C) 9 February</button>
+    <button class="option" onclick="mcq1('D')">D) 25 August</button>
+  </div>
+</div>
+
+<!-- PAGE 3: MCQ 2 -->
+<div class="page" id="p3">
+  <div class="mcq-box">
+    <div class="question">Q2) When did you become more important to me than myself?</div>
+    <button class="option" onclick="mcq2('A')">A) On your birthday</button>
+    <button class="option" onclick="mcq2('B')">B) Yesterday</button>
+    <button class="option" onclick="mcq2('C')">C) Few days after we met</button>
+    <button class="option" onclick="mcq2('D')">D) When I said â€œI love youâ€</button>
+    <button class="option" onclick="mcq2('E')">E) First call</button>
+    <div class="note" id="note2"></div>
+    <button class="next-btn" id="next2" onclick="go(4)">Next â†’</button>
+  </div>
+</div>
+
+<!-- PAGE 4: MCQ 3 -->
+<div class="page" id="p4">
+  <div class="mcq-box">
+    <div class="question">Q3) What can I do for you?</div>
+    <button class="option" onclick="mcq3('A')">A) Leave my family</button>
+    <button class="option" onclick="mcq3('B')">B) Stand by you forever</button>
+    <button class="option" onclick="mcq3('C')">C) Leave everything and come to you</button>
+    <button class="option" onclick="mcq3('D')">D) Fight the world for you</button>
+    <div class="note" id="note3"></div>
+    <button class="next-btn" id="next3" onclick="go(5)">Next â†’</button>
+  </div>
+</div>
+
+<!-- PAGE 5: Letter -->
+<div class="page" id="p5">
+  <div class="letter">
+    <p>This year, meeting you was the most beautiful thing that happened. The memories we made together will stay forever. You came into my life, and slowly my heart settled in you. I am so happy you came, and the love I have given you, I might never give to anyone else and never could. As long as you are here, I am complete.</p>
+    <p>Just like this year, I want the next year to be with you and always stay by your side, MUMMA ðŸ’—</p>
+    <button class="next-btn" onclick="go(6)">Next â†’</button>
+  </div>
+</div>
+
+<!-- PAGE 6: Screenshots -->
+<div class="page" id="p6">
+  <div class="letter">
+    <img src="https://i.imgur.com/SS1.png" style="width:100%;margin-bottom:10px;">
+    <img src="https://i.imgur.com/SS2.png" style="width:100%;margin-bottom:10px;">
+    <img src="https://i.imgur.com/SS3.png" style="width:100%;margin-bottom:10px;">
+    <img src="https://i.imgur.com/SS4.png" style="width:100%;margin-bottom:10px;">
+    <img src="https://i.imgur.com/SS5.png" style="width:100%;margin-bottom:10px;">
+    <button class="next-btn" onclick="go(7)">Next â†’</button>
+  </div>
+</div>
+
+<!-- PAGE 7: I Love You message -->
+<div class="page" id="p7">
+  <div class="message">
+    <p class="message-text">I love you before, I love you now, I will always love you, and forever â™¾ï¸ðŸ’—</p>
+    <button class="next-btn" onclick="go(8)">Next â†’</button>
+  </div>
+</div>
+
+<!-- PAGE 8: Always Take Care -->
+<div class="page" id="p8">
+  <div class="message">
+    <p class="message-text">Take care of yourself, enjoy your New Year, and just be mine forever. ðŸ¤ŒðŸ’—</p>
+  </div>
+</div>
+
+<script>
+let holdTimer;
+const heart=document.getElementById("heart");
+heart.addEventListener("touchstart",startHold);
+heart.addEventListener("mousedown",startHold);
+heart.addEventListener("touchend",clearHold);
+heart.addEventListener("mouseup",clearHold);
+function startHold(){
+  holdTimer=setTimeout(()=>{
+    document.getElementById("nextHeart").style.display="inline-block";
+  },800);
+}
+function clearHold(){ clearTimeout(holdTimer); }
+
+function go(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+
+function mcq1(a){ if(a==="C") go(3); else alert("Wrong answer, try again"); }
+function mcq2(a){
+  if(["A","C","D","E"].includes(a)){
+    document.getElementById("note2").innerText="A, C, D and E are also correct ðŸ’—";
+    document.getElementById("next2").style.display="inline-block";
+  } else { alert("Wrong answer, try again"); }
+}
+function mcq3(a){
+  if(["B","C","D"].includes(a)){
+    document.getElementById("note3").innerText="Because being with you matters the most ðŸ’ž";
+    document.getElementById("next3").style.display="inline-block";
+  } else { alert("Wrong answer, try again"); }
+}
+</script>
+</body>
+</html>
