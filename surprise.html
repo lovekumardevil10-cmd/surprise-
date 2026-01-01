@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surprise Gift</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 600px;
+    width: 90%;
+    background-color: #111;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+  }
+  button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff4081;
+    color: white;
+  }
+  .note {
+    margin-top: 20px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="page-container">
+  <!-- Start Page -->
+  <h1>🤌💗 Welcome! 🤌💗</h1>
+  <p>Click below to start your surprise gift!</p>
+  <button id="start-btn">Start</button>
+</div>
+
+<script>
+const pageContainer = document.getElementById('page-container');
+
+function showMCQ1() {
+  pageContainer.innerHTML = `
+    <h2>MCQ 1</h2>
+    <p>What is my birthday?</p>
+    <button onclick="checkMCQ1('A')">20 January</button>
+    <button onclick="checkMCQ1('B')">15 July</button>
+    <button onclick="checkMCQ1('C')">9 February</button>
+    <button onclick="checkMCQ1('D')">25 August</button>
+    <p id="mcq1-feedback"></p>
+  `;
+}
+
+function checkMCQ1(answer) {
+  const feedback = document.getElementById('mcq1-feedback');
+  if(answer === 'C') {
+    feedback.textContent = "Correct!";
+    setTimeout(showMCQ1Note, 1000);
+  } else {
+    feedback.textContent = "Wrong answer, try again!";
+  }
+}
+
+function showMCQ1Note() {
+  pageContainer.innerHTML = `
+    <h2>MCQ 1 Note</h2>
+    <div class="note">
+      <p>Yes! My birthday is 9 February. This year is special because you are here with me 💗🫶.</p>
+      <button onclick="showMCQ2()">Next</button>
+    </div>
+  `;
+}
+
+function showMCQ2() {
+  pageContainer.innerHTML = `
+    <h2>MCQ 2</h2>
+    <p>When did you become more important to me than myself?</p>
+    <button onclick="checkMCQ2('A')">On your birthday</button>
+    <button onclick="checkMCQ2('B')">Yesterday</button>
+    <button onclick="checkMCQ2('C')">Few days after we met</button>
+    <button onclick="checkMCQ2('D')">When we said I love you first time</button>
+    <button onclick="checkMCQ2('E')">On first call</button>
+    <p id="mcq2-feedback"></p>
+  `;
+}
+
+function checkMCQ2(answer) {
+  const feedback = document.getElementById('mcq2-feedback');
+  if(answer === 'C') {
+    feedback.textContent = "Correct!";
+    setTimeout(showMCQ2Note, 1000);
+  } else {
+    feedback.textContent = "Wrong answer, try again!";
+  }
+}
+
+function showMCQ2Note() {
+  pageContainer.innerHTML = `
+    <h2>MCQ 2 Note</h2>
+    <div class="note">
+      <p>After every special moment with you, you become more important to me than before that moment. Every memory adds a little more place in my heart for you 💗🫶.</p>
+      <button onclick="showMCQ3()">Next</button>
+    </div>
+  `;
+}
+document.getElementById('start-btn').onclick = showMCQ1;
+</script>
+
+</body>
+</html>
+<script>
+// Continue from Part 1
+
+function showMCQ3() {
+  pageContainer.innerHTML = `
+    <h2>MCQ 3</h2>
+    <p>What you think, I can do for you?</p>
+    <button onclick="checkMCQ3('A')">Leave my family</button>
+    <button onclick="checkMCQ3('B')">Always become yours</button>
+    <button onclick="checkMCQ3('C')">Leave everything and come to you</button>
+    <button onclick="checkMCQ3('D')">Fight the world for you</button>
+    <button onclick="checkMCQ3('E')">All the above</button>
+    <p id="mcq3-feedback"></p>
+  `;
+}
+
+function checkMCQ3(answer) {
+  const feedback = document.getElementById('mcq3-feedback');
+  if(['A','B','C','D','E'].includes(answer)) {
+    feedback.textContent = "Correct!";
+    setTimeout(showMCQ3Note, 1000);
+  } else {
+    feedback.textContent = "Wrong answer, try again!";
+  }
+}
+
+function showMCQ3Note() {
+  pageContainer.innerHTML = `
+    <h2>MCQ 3 Note</h2>
+    <div class="note">
+      <p>Yes! I would do anything for you. Every little thing I do is to keep you happy and safe 💗🫶🤌.</p>
+      <button onclick="showPhotosIntro()">Next</button>
+    </div>
+  `;
+}
+
+function showPhotosIntro() {
+  pageContainer.innerHTML = `
+    <h2>Some cute pics of most beautiful girl in the world 🤌💗</h2>
+    <p>Click next to see the photos!</p>
+    <button onclick="showPhotosCarousel()">Next</button>
+  `;
+}
+</script>
+<script>
+// Photos carousel
+const photos = [
+    "https://i.postimg.cc/QMM6bpBF/IMG-20251117-170257-434.jpg",
+    "https://i.postimg.cc/7YymcvCW/IMG-20250731-232940-651.jpg",
+    "https://i.postimg.cc/mDfHD4GG/IMG-20250602-WA0004.jpg",
+    "https://i.postimg.cc/prkhqn5v/IMG-20250705-154948-316.jpg",
+    "https://i.postimg.cc/wjntfzMN/IMG-20250927-235552-345.webp"
+];
+let photoIndex = 0;
+
+function showPhotosCarousel() {
+  pageContainer.innerHTML = `
+    <h2>Photos</h2>
+    <div class="carousel">
+      <img id="photo-display" src="${photos[0]}" style="max-width:80%; max-height:400px;">
+    </div>
+    <button onclick="prevPhoto()">Prev</button>
+    <button onclick="nextPhoto()">Next</button>
+    <button onclick="showLetter()">Next Page</button>
+  `;
+}
+
+function prevPhoto() {
+  photoIndex = (photoIndex - 1 + photos.length) % photos.length;
+  document.getElementById('photo-display').src = photos[photoIndex];
+}
+
+function nextPhoto() {
+  photoIndex = (photoIndex + 1) % photos.length;
+  document.getElementById('photo-display').src = photos[photoIndex];
+}
+
+// Letter page
+function showLetter() {
+  pageContainer.innerHTML = `
+    <h2>Letter</h2>
+    <p>
+      Wishing you the happiest new year 🤌💗. First of all, I thank God and you for letting me meet you this year. 
+      When I met you, I felt something pure, something real, something that slowly became very close to my heart 💗🫶.
+      Every moment with you makes me realize how important you are in my life 💞💘✨💫😘🥳.
+    </p>
+    <button onclick="showMemoriesIntro()">Next</button>
+  `;
+}
+
+// Memories intro page
+function showMemoriesIntro() {
+  pageContainer.innerHTML = `
+    <h2>Memories</h2>
+    <p>Here are some beautiful memories I want to cherish forever 🤌💗</p>
+    <button onclick="showMemoriesCarousel()">Next</button>
+  `;
+}
+
+// Memories carousel
+const memories = [
+    "https://i.postimg.cc/KvhWt3xw/Screenshot-20251231-024726.jpg",
+    "https://i.postimg.cc/xTsKnBxR/Screenshot-20251229-172246.jpg",
+    "https://i.postimg.cc/GpPthy30/Screenshot-20251228-042401.jpg",
+    "https://i.postimg.cc/yYF8TR9F/Screenshot-20251230-121617.jpg",
+    "https://i.postimg.cc/h4QLcCF5/Screenshot-20251228-041031.jpg"
+];
+let memoryIndex = 0;
+
+function showMemoriesCarousel() {
+  pageContainer.innerHTML = `
+    <h2>Memories</h2>
+    <img id="memory-display" src="${memories[0]}" style="max-width:80%; max-height:400px;">
+    <div>
+      <button onclick="prevMemory()">Prev</button>
+      <button onclick="nextMemory()">Next</button>
+      <button onclick="showSorryPage()">Next Page</button>
+    </div>
+  `;
+}
+
+function prevMemory() {
+  memoryIndex = (memoryIndex - 1 + memories.length) % memories.length;
+  document.getElementById('memory-display').src = memories[memoryIndex];
+}
+
+function nextMemory() {
+  memoryIndex = (memoryIndex + 1) % memories.length;
+  document.getElementById('memory-display').src = memories[memoryIndex];
+}
+
+// Sorry page
+function showSorryPage() {
+  pageContainer.innerHTML = `
+    <h2>Sorry</h2>
+    <p>
+      I know sometimes things go wrong, and I may not always be perfect. I hope you can forgive any mistakes 💗.
+      I’ll keep you safe and loved, and I can’t wait to have you back in my arms. You mean everything to me 🤌🫶💞.
+    </p>
+    <button onclick="showTakeCarePage()">Next</button>
+  `;
+}
+
+// Take care & final message
+function showTakeCarePage() {
+  pageContainer.innerHTML = `
+    <h2>Take Care</h2>
+    <p>
+      Always take care of yourself and wishing you a happiest new year 🤌💗. 
+      Eat on time, otherwise you might get weak, though you are already very muscular 🤣. 
+      Dress properly when outside and keep safe. I love you soooooo much, my jaan ❤️.
+    </p>
+    <p>Bye, i love you soooooo muchhh mumma 🤌💗</p>
+  `;
+}
+</script>
