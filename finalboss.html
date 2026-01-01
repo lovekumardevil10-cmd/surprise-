@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surprise</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #111;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+button {
+    padding: 15px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: #ff4d6d;
+    color: #fff;
+}
+button:hover {
+    background-color: #ff7f9e;
+}
+.hidden {
+    display: none;
+}
+.note-box {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="startPage">
+<h1 style="text-align:center;">Start the Surprise 🎉💗</h1>
+<button id="startBtn">Start</button>
+</div>
+
+<div class="container hidden" id="mcq1Page">
+<h2>MCQ 1: What is my birthday?</h2>
+<form id="mcq1Form">
+<input type="radio" name="q1" value="A"> A) 20 January<br>
+<input type="radio" name="q1" value="B"> B) 15 July<br>
+<input type="radio" name="q1" value="C"> C) 9 February<br>
+<input type="radio" name="q1" value="D"> D) 25 August<br>
+<button type="button" id="mcq1Submit">Submit</button>
+</form>
+<div id="mcq1Feedback" class="note-box hidden"></div>
+</div>
+
+<div class="container hidden" id="mcq2Page">
+<h2>MCQ 2: When did you become more important to me than myself?</h2>
+<form id="mcq2Form">
+<input type="checkbox" name="q2" value="A"> A) On your birthday<br>
+<input type="checkbox" name="q2" value="B"> B) Yesterday<br>
+<input type="checkbox" name="q2" value="C"> C) Few days after we met<br>
+<input type="checkbox" name="q2" value="D"> D) When we said "I love you" first time<br>
+<input type="checkbox" name="q2" value="E"> E) On first call<br>
+<button type="button" id="mcq2Submit">Submit</button>
+</form>
+<div id="mcq2Feedback" class="note-box hidden"></div>
+</div>
+
+<div class="container hidden" id="mcq3Page">
+<h2>MCQ 3: What you think, I can do for you?</h2>
+<form id="mcq3Form">
+<input type="checkbox" name="q3" value="A"> A) Leave my family<br>
+<input type="checkbox" name="q3" value="B"> B) Always becomes yours<br>
+<input type="checkbox" name="q3" value="C"> C) Leave everything and come to you<br>
+<input type="checkbox" name="q3" value="D"> D) Fight the world for you<br>
+<input type="checkbox" name="q3" value="E"> E) All the above<br>
+<button type="button" id="mcq3Submit">Submit</button>
+</form>
+<div id="mcq3Feedback" class="note-box hidden"></div>
+</div>
+
+<script>
+// Start button
+document.getElementById("startBtn").addEventListener("click", function(){
+    document.getElementById("startPage").classList.add("hidden");
+    document.getElementById("mcq1Page").classList.remove("hidden");
+});
+
+// MCQ 1 submit
+document.getElementById("mcq1Submit").addEventListener("click", function(){
+    let q1 = document.querySelector('input[name="q1"]:checked');
+    let feedback = document.getElementById("mcq1Feedback");
+    if(!q1) return alert("Please select an option");
+    if(q1.value === "C") {
+        feedback.innerHTML = "Correct! 9 February is my birthday 💗🫶";
+        feedback.classList.remove("hidden");
+        setTimeout(()=> {
+            document.getElementById("mcq1Page").classList.add("hidden");
+            document.getElementById("mcq2Page").classList.remove("hidden");
+        }, 1500);
+    } else {
+        alert("Wrong answer, try again");
+    }
+});
+
+// MCQ 2 submit
+document.getElementById("mcq2Submit").addEventListener("click", function(){
+    let checked = document.querySelectorAll('input[name="q2"]:checked');
+    let values = Array.from(checked).map(c => c.value);
+    let correct = ["C"];
+    let feedback = document.getElementById("mcq2Feedback");
+    if(values.length === 0) return alert("Please select at least one option");
+    if(values.includes("C")) {
+        feedback.innerHTML = "Correct! After every special moment with you, you become even more important to me 💗🫶🤌";
+        feedback.classList.remove("hidden");
+        setTimeout(()=>{
+            document.getElementById("mcq2Page").classList.add("hidden");
+            document.getElementById("mcq3Page").classList.remove("hidden");
+        },1500);
+    } else {
+        alert("Wrong answer, try again");
+    }
+});
+</script>
+<!-- Next page will continue in Part 2 -->
+<script>
+// MCQ 3 submit
+document.getElementById("mcq3Submit").addEventListener("click", function(){
+    let checked = document.querySelectorAll('input[name="q3"]:checked');
+    let values = Array.from(checked).map(c => c.value);
+    let correct = ["A","B","C","D","E"];
+    let feedback = document.getElementById("mcq3Feedback");
+    if(values.length === 0) return alert("Please select at least one option");
+    if(correct.every(v=>values.includes(v))) {
+        feedback.innerHTML = "Correct! I can do everything for you because you mean the world to me 💗🫶🤌💞";
+        feedback.classList.remove("hidden");
+        setTimeout(()=>{
+            document.getElementById("mcq3Page").classList.add("hidden");
+            document.getElementById("photosIntroPage").classList.remove("hidden");
+        },1500);
+    } else {
+        alert("Wrong answer, try again");
+    }
+});
+</script>
+
+<div class="container hidden" id="photosIntroPage">
+<h2>Photos Time 💫✨</h2>
+<p>Here are some special moments captured just for you 💘🥳</p>
+<button id="showPhotosBtn">See Photos</button>
+</div>
+
+<div class="container hidden" id="photosPage">
+<div id="photoContainer" class="note-box">
+<!-- Photos will slide here -->
+</div>
+<button id="nextFromPhotos" class="hidden">Next</button>
+</div>
+
+<script>
+// Photos array
+const photos = [
+    "https://i.postimg.cc/QMM6bpBF/IMG-20251117-170257-434.jpg",
+    "https://i.postimg.cc/7YymcvCW/IMG-20250731-232940-651.jpg",
+    "https://i.postimg.cc/mDfHD4GG/IMG-20250602-WA0004.jpg",
+    "https://i.postimg.cc/prkhqn5v/IMG-20250705-154948-316.jpg",
+    "https://i.postimg.cc/wjntfzMN/IMG-20250927-235552-345.webp"
+];
+
+let currentPhoto = 0;
+
+document.getElementById("showPhotosBtn").addEventListener("click", function(){
+    document.getElementById("photosIntroPage").classList.add("hidden");
+    document.getElementById("photosPage").classList.remove("hidden");
+    showPhoto();
+});
+
+function showPhoto(){
+    const container = document.getElementById("photoContainer");
+    container.innerHTML = `<img src="${photos[currentPhoto]}" style="width:100%;border-radius:10px">`;
+    document.getElementById("nextFromPhotos").classList.remove("hidden");
+}
+
+document.getElementById("nextFromPhotos").addEventListener("click", function(){
+    if(currentPhoto < photos.length - 1){
+        currentPhoto++;
+        showPhoto();
+    } else {
+        document.getElementById("photosPage").classList.add("hidden");
+        document.getElementById("letterPage").classList.remove("hidden");
+    }
+});
+</script>
+
+<div class="container hidden" id="letterPage">
+<h2>Letter for You 💗🫶</h2>
+<p>First of all, I thank God and you that I found you in this year. I can’t forget this year because meeting you made every moment special. Every smile, every talk, every memory with you is a treasure. I am so happy to have you in my life, and I promise to always care for you and love you endlessly 💗🫶🤌💞💘✨💫😘🥳.</p>
+<button id="nextFromLetter">Next</button>
+</div>
+
+<script>
+document.getElementById("nextFromLetter").addEventListener("click", function(){
+    document.getElementById("letterPage").classList.add("hidden");
+    document.getElementById("memoriesIntroPage").classList.remove("hidden");
+});
+</script>
+
+<div class="container hidden" id="memoriesIntroPage">
+<h2>Memories 💗✨</h2>
+<p>These screenshots capture moments we shared 🫂💞💘</p>
+<button id="showMemoriesBtn">See Memories</button>
+</div>
+<div class="container hidden" id="memoriesPage">
+<div id="memoriesContainer" class="note-box">
+<img id="memoryImg" src="" style="width:100%;border-radius:10px">
+</div>
+<button id="prevMemory">Prev</button>
+<button id="nextMemory">Next</button>
+<button id="nextFromMemories" class="hidden">Next</button>
+</div>
+
+<script>
+const memories = [
+    "https://i.postimg.cc/KvhWt3xw/Screenshot-20251231-024726.jpg",
+    "https://i.postimg.cc/xTsKnBxR/Screenshot-20251229-172246.jpg",
+    "https://i.postimg.cc/GpPthy30/Screenshot-20251228-042401.jpg",
+    "https://i.postimg.cc/yYF8TR9F/Screenshot-20251230-121617.jpg",
+    "https://i.postimg.cc/h4QLcCF5/Screenshot-20251228-041031.jpg"
+];
+
+let currentMemory = 0;
+
+document.getElementById("showMemoriesBtn").addEventListener("click", function(){
+    document.getElementById("memoriesIntroPage").classList.add("hidden");
+    document.getElementById("memoriesPage").classList.remove("hidden");
+    showMemory();
+});
+
+function showMemory(){
+    document.getElementById("memoryImg").src = memories[currentMemory];
+    if(currentMemory === memories.length - 1){
+        document.getElementById("nextFromMemories").classList.remove("hidden");
+    }
+}
+
+document.getElementById("prevMemory").addEventListener("click", function(){
+    if(currentMemory > 0) currentMemory--;
+    showMemory();
+});
+
+document.getElementById("nextMemory").addEventListener("click", function(){
+    if(currentMemory < memories.length - 1) currentMemory++;
+    showMemory();
+});
+
+document.getElementById("nextFromMemories").addEventListener("click", function(){
+    document.getElementById("memoriesPage").classList.add("hidden");
+    document.getElementById("sorryPage").classList.remove("hidden");
+});
+</script>
+
+<div class="container hidden" id="sorryPage">
+<h2>Sorry 💗🤌</h2>
+<p>Hey, I hope you forgive me for any mistake I’ve made. I miss you and really want you back in my life. I promise to take care of you and love you endlessly. You mean everything to me, my heart and my soul belong to you. Please come back, I’ll hold you with so much love 💗🫶🤌💞💘✨💫😘🥳.</p>
+<button id="nextFromSorry">Next</button>
+</div>
+
+<script>
+document.getElementById("nextFromSorry").addEventListener("click", function(){
+    document.getElementById("sorryPage").classList.add("hidden");
+    document.getElementById("takeCarePage").classList.remove("hidden");
+});
+</script>
+
+<div class="container hidden" id="takeCarePage">
+<h2>Take Care 💗🫶</h2>
+<p>Always take care of yourself and again wishing you a happiest new year 🤌💗.<br>
+Play safely, eat on time or else you’ll get weak, though you’re already very muscular 🤣. Always wear full clothes to stay safe from unwanted attention. I’ll always care for you and love you endlessly. Stay safe, my love ❤️</p>
+<button id="nextFromTakeCare">Next</button>
+</div>
+
+<script>
+document.getElementById("nextFromTakeCare").addEventListener("click", function(){
+    document.getElementById("takeCarePage").classList.add("hidden");
+    document.getElementById("iLoveYouPage").classList.remove("hidden");
+});
+</script>
+<div class="container hidden" id="iLoveYouPage">
+<h2>I Love You 💗🫶🤌</h2>
+<p>Bye, I love you soooooo muchhh mumma 🤌💗. You are my everything, my heart, my soul, my world. Always remember, I’ll cherish you and keep you close forever. You make every day brighter and happier ✨💫😘🥳. Love you endlessly 💞💘.</p>
+</div>
+
+<style>
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #111;
+    color: #fff;
+    border-radius: 15px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+button {
+    margin: 15px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff5e5e;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff3b3b;
+}
+
+.note-box {
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+</style>
