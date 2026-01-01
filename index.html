@@ -2,183 +2,361 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Surprise Gift</title>
 <style>
-body{
-  margin:0;
-  background:#0b0b0b;
-  color:#fff;
-  font-family:Arial, sans-serif;
-}
-
-.container{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.page{
-  display:none;
-  max-width:340px;
-  width:90%;
-  text-align:center;
-}
-
-.page.active{
-  display:block;
-}
-
-.heart{
-  font-size:90px;
-  cursor:pointer;
-}
-
-.btn{
-  margin-top:20px;
-  padding:10px 22px;
-  border:none;
-  border-radius:20px;
-  background:#ff4f8b;
-  color:white;
-  font-size:14px;
-  display:none;
-}
-
-.mcq{
-  background:#1a1a1a;
-  padding:20px;
-  border-radius:14px;
-  text-align:left;
-}
-
-.q{
-  font-size:16px;
-  font-weight:bold;
-  margin-bottom:14px;
-}
-
-.opt{
-  display:block;
-  width:100%;
-  margin-bottom:10px;
-  padding:10px;
-  border-radius:10px;
-  border:none;
-  background:#2a2a2a;
-  color:white;
-  text-align:left;
-}
-
-.opt:active{
-  background:#ff4f8b;
-}
-
-.note{
-  font-size:13px;
-  margin-top:10px;
-}
+  body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+  }
+  .center-box {
+    max-width: 700px;
+    margin: 80px auto 80px auto;
+    padding: 30px;
+    background: rgba(30,30,30,0.95);
+    border-radius: 20px;
+    text-align: center;
+  }
+  .hidden { display: none; }
+  button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background: #ff69b4;
+    color: white;
+  }
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<!-- PAGE 1 -->
-<div class="page active" id="p1">
-  <h3>A little surprise for you</h3>
-  <div class="heart" id="heart">💗</div>
-  <p style="font-size:13px;">Hold the heart</p>
-  <button class="btn" id="startBtn" onclick="go(2)">Next →</button>
+<!-- Start Page -->
+<div id="startPage" class="center-box">
+  <h1>🤌💗 Hold me for 3 seconds</h1>
+  <button id="heartHold">Hold Here</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="page" id="p2">
-  <div class="mcq">
-    <div class="q">Q1) What is my birthday?</div>
-    <button class="opt" onclick="q1('A')">A) 20 January</button>
-    <button class="opt" onclick="q1('B')">B) 15 July</button>
-    <button class="opt" onclick="q1('C')">C) 9 February</button>
-    <button class="opt" onclick="q1('D')">D) 25 August</button>
-  </div>
+<!-- MCQ 1 -->
+<div id="mcq1" class="center-box hidden">
+  <h2>1) What is my birthday?</h2>
+  <button onclick="nextMCQ1('wrong')">A) 20 January</button><br><br>
+  <button onclick="nextMCQ1('wrong')">B) 15 July</button><br><br>
+  <button onclick="nextMCQ1('correct')">C) 9 February</button><br><br>
+  <button onclick="nextMCQ1('wrong')">D) 25 August</button><br><br>
+  <p id="mcq1Result"></p>
 </div>
 
-<!-- PAGE 3 -->
-<div class="page" id="p3">
-  <div class="mcq">
-    <div class="q">Q2) When did you become important to me?</div>
-    <button class="opt" onclick="q2()">A) On your birthday</button>
-    <button class="opt" onclick="q2()">B) Yesterday</button>
-    <button class="opt" onclick="q2()">C) Few days after we met</button>
-    <button class="opt" onclick="q2()">D) When I said I love you</button>
-    <button class="opt" onclick="q2()">E) First call</button>
-    <div class="note">More than one answer is correct 💗</div>
-    <button class="btn" id="n2" onclick="go(4)">Next →</button>
-  </div>
-</div>
-
-<!-- PAGE 4 -->
-<div class="page" id="p4">
-  <div class="mcq">
-    <div class="q">Q3) What can I do for you?</div>
-    <button class="opt" onclick="q3()">A) Leave my family</button>
-    <button class="opt" onclick="q3()">B) Stand by you forever</button>
-    <button class="opt" onclick="q3()">C) Leave everything and come to you</button>
-    <button class="opt" onclick="q3()">D) Fight the world for you</button>
-    <div class="note">Some answers don’t need conditions 💞</div>
-    <button class="btn" id="n3" onclick="go(5)">Next →</button>
-  </div>
-</div>
-
-<!-- PAGE 5 -->
-<div class="page" id="p5">
-  <h2>💞</h2>
-  <p>
-    This was just the beginning.<br><br>
-    Happy New Year 2026 🎉<br><br>
-    I Love You ❤️
-  </p>
-</div>
-
+<!-- MCQ 2 (question + options, note in Part 2) -->
+<div id="mcq2" class="center-box hidden">
+  <h2>2) When did you become more important to me than myself?</h2>
+  <button onclick="nextMCQ2('wrong')">A) On your birthday</button><br><br>
+  <button onclick="nextMCQ2('wrong')">B) Yesterday</button><br><br>
+  <button onclick="nextMCQ2('correct')">C) Few days after we met</button><br><br>
+  <button onclick="nextMCQ2('wrong')">D) When we said I love you to each other first time</button><br><br>
+  <button onclick="nextMCQ2('wrong')">E) On first call</button><br><br>
+  <p id="mcq2Result"></p>
 </div>
 
 <script>
-let timer;
-const heart=document.getElementById("heart");
+  // Start page heart hold logic
+  const heartHoldBtn = document.getElementById('heartHold');
+  let holdTimer;
+  heartHoldBtn.addEventListener('mousedown', () => {
+    holdTimer = setTimeout(() => {
+      document.getElementById('startPage').classList.add('hidden');
+      document.getElementById('mcq1').classList.remove('hidden');
+    }, 3000);
+  });
+  heartHoldBtn.addEventListener('mouseup', () => { clearTimeout(holdTimer); });
 
-heart.addEventListener("touchstart",hold);
-heart.addEventListener("mousedown",hold);
-heart.addEventListener("touchend",clear);
-heart.addEventListener("mouseup",clear);
+  // MCQ1
+  function nextMCQ1(answer) {
+    const result = document.getElementById('mcq1Result');
+    if(answer==='correct') {
+      result.textContent = 'Correct!';
+      setTimeout(() => {
+        document.getElementById('mcq1').classList.add('hidden');
+        document.getElementById('mcq2').classList.remove('hidden');
+      }, 1000);
+    } else {
+      result.textContent = 'Wrong answer, try again.';
+    }
+  }
 
-function hold(){
-  timer=setTimeout(()=>{
-    document.getElementById("startBtn").style.display="inline-block";
-  },700);
-}
-function clear(){ clearTimeout(timer); }
-
-function go(n){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById("p"+n).classList.add("active");
-}
-
-function q1(a){
-  if(a==="C") go(3);
-  else alert("Try again 🙂");
-}
-
-function q2(){
-  document.getElementById("n2").style.display="inline-block";
-}
-
-function q3(){
-  document.getElementById("n3").style.display="inline-block";
-}
+  // MCQ2
+  function nextMCQ2(answer) {
+    const result = document.getElementById('mcq2Result');
+    if(answer==='correct') {
+      result.textContent = 'Correct!';
+      setTimeout(() => {
+        document.getElementById('mcq2').classList.add('hidden');
+        // Note + next page in Part 2
+      }, 1000);
+    } else {
+      result.textContent = 'Wrong answer, try again.';
+    }
+  }
 </script>
 
 </body>
-  </html>
+</html>
+<!-- MCQ 2 Note -->
+<div id="mcq2Note" class="center-box hidden">
+  <h3>Note:</h3>
+  <p>After every special moment with you, you become more important to me than before. Each memory, each smile, makes my heart hold you closer every day. 💗🫶🤌</p>
+  <button onclick="nextToMCQ3()">Next</button>
+</div>
+
+<!-- MCQ 3 -->
+<div id="mcq3" class="center-box hidden">
+  <h2>3) What do you think I can do for you?</h2>
+  <button onclick="nextMCQ3('correct')">A) Leave my family</button><br><br>
+  <button onclick="nextMCQ3('correct')">B) Always become yours</button><br><br>
+  <button onclick="nextMCQ3('correct')">C) Leave everything and come to you</button><br><br>
+  <button onclick="nextMCQ3('correct')">D) Fight the world for you</button><br><br>
+  <button onclick="nextMCQ3('correct')">E) All the above</button><br><br>
+  <p id="mcq3Result"></p>
+</div>
+
+<!-- MCQ 3 Note -->
+<div id="mcq3Note" class="center-box hidden">
+  <h3>Note:</h3>
+  <p>All these promises are just a fraction of what I wish to do for you. Every step, every effort, is to make you feel loved, protected, and cherished forever. 💗🫶🤌</p>
+  <button onclick="nextToPhotosIntro()">Next</button>
+</div>
+
+<!-- Photos Intro Page -->
+<div id="photosIntro" class="center-box hidden">
+  <h2>Some cute pics of the most beautiful girl in the world 🤌💗</h2>
+  <button onclick="nextToPhotos()">See Photos</button>
+</div>
+
+<!-- Photos Carousel Page -->
+<div id="photosPage" class="center-box hidden">
+  <div id="photoContainer">
+    <img id="currentPhoto" src="https://i.postimg.cc/QMM6bpBF/IMG-20251117-170257-434.jpg" width="100%" style="border-radius: 15px;">
+  </div>
+  <br>
+  <button onclick="prevPhoto()">Previous</button>
+  <button onclick="nextPhoto()">Next</button>
+</div>
+
+<script>
+  // Navigation
+  function nextToMCQ3() {
+    document.getElementById('mcq2Note').classList.add('hidden');
+    document.getElementById('mcq3').classList.remove('hidden');
+  }
+
+  function nextMCQ3(answer) {
+    const result = document.getElementById('mcq3Result');
+    if(answer==='correct') {
+      result.textContent = 'Correct!';
+      setTimeout(() => {
+        document.getElementById('mcq3').classList.add('hidden');
+        document.getElementById('mcq3Note').classList.remove('hidden');
+      }, 1000);
+    }
+  }
+
+  function nextToPhotosIntro() {
+    document.getElementById('mcq3Note').classList.add('hidden');
+    document.getElementById('photosIntro').classList.remove('hidden');
+  }
+
+  function nextToPhotos() {
+    document.getElementById('photosIntro').classList.add('hidden');
+    document.getElementById('photosPage').classList.remove('hidden');
+  }
+
+// Photos carousel
+const photos = [
+    "https://i.postimg.cc/QMM6bpBF/IMG-20251117-170257-434.jpg",
+    "https://i.postimg.cc/7YymcvCW/IMG-20250731-232940-651.jpg",
+    "https://i.postimg.cc/mDfHD4GG/IMG-20250602-WA0004.jpg",
+    "https://i.postimg.cc/prkhqn5v/IMG-20250705-154948-316.jpg",
+    "https://i.postimg.cc/wjntfzMN/IMG-20250927-235552-345.webp"
+];
+
+let currentPhoto = 0;
+const photoContainer = document.getElementById("photo-carousel");
+const nextBtn = document.getElementById("next-photo");
+const prevBtn = document.getElementById("prev-photo");
+
+function showPhoto(index) {
+    if(index < 0) index = photos.length - 1;
+    if(index >= photos.length) index = 0;
+    photoContainer.innerHTML = `<img src="${photos[index]}" style="width:100%;border-radius:10px;">`;
+    currentPhoto = index;
+}
+
+nextBtn.addEventListener("click", () => showPhoto(currentPhoto + 1));
+prevBtn.addEventListener("click", () => showPhoto(currentPhoto - 1));
+
+// Initialize first photo
+showPhoto(currentPhoto);
+
+// Letter Page
+const letterPage = document.getElementById("letter-page");
+letterPage.innerHTML = `
+<h2>Letter for You 💗🤌</h2>
+<p>
+Wishing you a happiest new year! 🥳✨💫😘 This letter is to remind you how much you mean to me. Every memory, every laugh, every small moment with you stays in my heart forever. You bring happiness, love, and warmth into my life, and I promise to always cherish you 💗🫶🤌🫂💞💘✨💫.
+</p>
+`;
+
+// Memories Intro Page
+const memoriesIntro = document.getElementById("memories-intro-page");
+memoriesIntro.innerHTML = `
+<h2>Memories of Our Moments 💗</h2>
+<p>
+Here are some snapshots of the most special times we've shared together. Every smile, every silly moment, every conversation is a treasure I keep close to my heart 🤌💗.
+</p>
+`;
+
+// Memories Carousel
+const memories = [
+    "https://i.postimg.cc/KvhWt3xw/Screenshot-20251231-024726.jpg",
+    "https://i.postimg.cc/xTsKnBxR/Screenshot-20251229-172246.jpg",
+    "https://i.postimg.cc/GpPthy30/Screenshot-20251228-042401.jpg",
+    "https://i.postimg.cc/yYF8TR9F/Screenshot-20251230-121617.jpg",
+    "https://i.postimg.cc/h4QLcCF5/Screenshot-20251228-041031.jpg"
+];
+
+let currentMemory = 0;
+const memoryContainer = document.getElementById("memory-carousel");
+const nextMemory = document.getElementById("next-memory");
+const prevMemory = document.getElementById("prev-memory");
+
+function showMemory(index) {
+    if(index < 0) index = memories.length - 1;
+    if(index >= memories.length) index = 0;
+    memoryContainer.innerHTML = `<img src="${memories[index]}" style="width:100%;border-radius:10px;">`;
+    currentMemory = index;
+}
+
+nextMemory.addEventListener("click", () => showMemory(currentMemory + 1));
+prevMemory.addEventListener("click", () => showMemory(currentMemory - 1));
+
+// Initialize first memory
+showMemory(currentMemory);
+
+// Sorry Page
+const sorryPage = document.getElementById("sorry-page");
+sorryPage.innerHTML = `
+<h2>I'm Sorry 💗🤌</h2>
+<p>
+I hope you can forgive any mistakes I’ve made along the way. I promise to keep you safe, happy, and loved. Please come back to me, I will literally hold you with all my love 💗🤌. You mean the world to me, baby 🫶💞💘✨💫.
+</p>
+`;
+
+// Take Care Page
+const takeCarePage = document.getElementById("take-care-page");
+takeCarePage.innerHTML = `
+<h2>Take Care of Yourself 💗🤌</h2>
+<p>
+Always take care of yourself and wishing you a happiest new year! 🥳✨💫 
+Remember to eat on time otherwise you’ll get weak, and you are already very muscular 🤣. Play safely during kabbadi and wear full clothes so no one can see you. Stay safe, healthy, and happy 💗🫶🤌🫂💞💘✨💫. And forgive me if I bother, I only want the best for you.
+</p>
+<p>Bye, I love you soooooo muchhh 🤌💗</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Surprise</title>
+<style>
+    body {
+        background-color: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #111;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+    img {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        margin: 15px 5px;
+        border: none;
+        border-radius: 8px;
+        background-color: #ff4081;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #e73370;
+    }
+    h2 {
+        margin-bottom: 20px;
+    }
+    p {
+        line-height: 1.6;
+    }
+</style>
+</head>
+<body>
+
+<!-- Photos Carousel -->
+<div id="photo-intro-page" class="container">
+    <h2>Some cute pics of most beautiful girl in the world 🤌💗</h2>
+    <button id="show-photos-btn">See Photos</button>
+</div>
+
+<div id="photo-carousel-page" class="container" style="display:none;">
+    <div id="photo-carousel"></div>
+    <button id="prev-photo">Previous</button>
+    <button id="next-photo">Next</button>
+</div>
+
+<!-- Letter Page -->
+<div id="letter-page" class="container" style="display:none;"></div>
+
+<!-- Memories Intro Page -->
+<div id="memories-intro-page" class="container" style="display:none;"></div>
+
+<!-- Memories Carousel Page -->
+<div id="memories-carousel-page" class="container" style="display:none;">
+    <div id="memory-carousel"></div>
+    <button id="prev-memory">Previous</button>
+    <button id="next-memory">Next</button>
+</div>
+
+<!-- Sorry Page -->
+<div id="sorry-page" class="container" style="display:none;"></div>
+
+<!-- Take Care Page -->
+<div id="take-care-page" class="container" style="display:none;"></div>
+
+<script src="script.js"></script>
+<script>
+    // Show Photos button
+    const showPhotosBtn = document.getElementById("show-photos-btn");
+    const photoIntro = document.getElementById("photo-intro-page");
+    const photoCarouselPage = document.getElementById("photo-carousel-page");
+
+    showPhotosBtn.addEventListener("click", () => {
+        photoIntro.style.display = "none";
+        photoCarouselPage.style.display = "block";
+    });
+</script>
+
+</body>
+</html>
